@@ -1,0 +1,67 @@
+@server=http://localhost:4004
+@username=alice
+@password=
+
+
+### Books
+# @name Books_GET
+GET {{server}}/odata/v4/catalog/Books
+Authorization: Basic {{username}}:{{password}}
+
+
+### Books Drafts GET
+# @name Books_Drafts_GET
+GET {{server}}/odata/v4/catalog/Books?$filter=(IsActiveEntity eq false)
+Authorization: Basic {{username}}:{{password}}
+
+
+### Books Draft POST
+# @name Books_Draft_POST
+POST {{server}}/odata/v4/catalog/Books
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "title": "title-400863",
+  "stock": 8
+}
+
+
+### Result from POST request above
+@draftID={{Books_Draft_POST.response.body.$.ID}}
+
+
+### Books Draft PATCH
+# @name Books_Draft_Patch
+PATCH {{server}}/odata/v4/catalog/Books(ID={{draftID}},IsActiveEntity=false)
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "title": "title-400863",
+  "stock": 8
+}
+
+
+### Books Draft Prepare
+# @name Books_Draft_Prepare
+POST {{server}}/odata/v4/catalog/Books(ID={{draftID}},IsActiveEntity=false)/AdminService.draftPrepare
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{}
+
+
+### Books Draft Activate
+# @name Books_Draft_Activate
+POST {{server}}/odata/v4/catalog/Books(ID={{draftID}},IsActiveEntity=false)/AdminService.draftActivate
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{}
+
+
+### FeatureControl
+# @name FeatureControl_GET
+GET {{server}}/odata/v4/catalog/FeatureControl
+Authorization: Basic {{username}}:{{password}}
