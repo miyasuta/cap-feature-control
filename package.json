@@ -7,7 +7,8 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8",
-    "express": "^4"
+    "express": "^4",
+    "@sap/xssec": "^4"
   },
   "devDependencies": {
     "@cap-js/cds-typer": ">=0.1",
@@ -15,13 +16,28 @@
     "@cap-js/sqlite": "^1",
     "@types/node": "^22.0.0",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "cds-plugin-ui5": "^0.9.3"
   },
   "scripts": {
     "start": "cds-serve",
-    "watch": "cds-tsx w"
+    "watch": "cds-tsx w",
+    "watch-listreport": "cds watch --open ns.listreport/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/listreport"
+  ],
+  "cds": {
+    "requires": {
+      "[production]": {
+        "auth": "xsuaa"
+      }
+    }
   }
 }
