@@ -19,33 +19,36 @@ service CatalogService {
 }
 
 // Enable / Disable operations
-// // CRUD Operations
-// annotate CatalogService.Books with @(
-//     Capabilities.UpdateRestrictions: {
-//         Updatable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } }
-//     },
-//     Capabilities.DeleteRestrictions: {
-//         Deletable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } }
-//     }
-// );
+// CRUD Operations
+annotate CatalogService.Books with @(
+    Capabilities.InsertRestrictions: {
+        Updatable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } }
+    },
+    // Capabilities.UpdateRestrictions: {
+    //     Updatable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } }
+    // },
+    Capabilities.DeleteRestrictions: {
+        Deletable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } }
+    },
+);
 
-// // Bound Action
-// annotate CatalogService.Books with actions {
-//     updateStock @(
-//         Core.OperationAvailable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } } 
-//         // Core.OperationAvailable: { $edmJson: { $Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } } } //this does not work
-//     );
-// };
+// Bound Action
+annotate CatalogService.Books with actions {
+    updateStock @(
+        Core.OperationAvailable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } } 
+        // Core.OperationAvailable: { $edmJson: { $Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } } } //this does not work
+    );
+};
 
 
 // Hide / Show operations
 // CRUD Operations
-annotate CatalogService.Books with @(
-    UI.CreateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }, //this works
-    // UI.CreateHidden : { $edmJson: {$Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled'} } }, // this does not work
-    UI.UpdateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } },
-    UI.DeleteHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }
-);
+// annotate CatalogService.Books with @(
+//     UI.CreateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }, //this works
+//     // UI.CreateHidden : { $edmJson: {$Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled'} } }, // this does not work
+//     UI.UpdateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } },
+//     UI.DeleteHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }
+// );
 
 // Unbound Action
 annotate CatalogService.autoFillStock with @(
