@@ -35,8 +35,8 @@ annotate CatalogService.Books with @(
 // Bound Action
 annotate CatalogService.Books with actions {
     updateStock @(
-        Core.OperationAvailable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } } 
-        // Core.OperationAvailable: { $edmJson: { $Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } } } //this does not work
+        // Core.OperationAvailable: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled' } }
+        Core.OperationAvailable: { $edmJson: { $Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } } } //this does not work
     );
 };
 
