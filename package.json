@@ -8,7 +8,7 @@
   "dependencies": {
     "@sap/cds": "^10",
     "@sap/xssec": "^4",
-    "express": "^4"
+    "express": "^5"
   },
   "devDependencies": {
     "@cap-js/cds-typer": ">=0.1",
