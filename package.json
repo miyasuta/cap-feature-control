@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^10",
-    "express": "^4",
+    "express": "^5",
     "@sap/xssec": "^4"
   },
   "devDependencies": {
@@ -17,7 +17,7 @@
     "@types/node": "^22.0.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
-    "cds-plugin-ui5": "^0.9.3"
+    "cds-plugin-ui5": "^0.17.4"
   },
   "scripts": {
     "start": "cds-serve",
