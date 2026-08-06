@@ -43,12 +43,12 @@ annotate CatalogService.Books with actions {
 
 // Hide / Show operations
 // CRUD Operations
-// annotate CatalogService.Books with @(
-//     UI.CreateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }, //this works
-//     // UI.CreateHidden : { $edmJson: {$Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled'} } }, // this does not work
-//     UI.UpdateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } },
-//     UI.DeleteHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }
-// );
+annotate CatalogService.Books with @(
+    // UI.CreateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }, //this works
+    UI.CreateHidden : { $edmJson: {$Not: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationEnabled'} } }, // this does not work
+    UI.UpdateHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } },
+    UI.DeleteHidden: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' } }
+);
 
 // Unbound Action
 annotate CatalogService.autoFillStock with @(
@@ -104,7 +104,7 @@ annotate CatalogService.Books with @(
             $Type : 'UI.DataFieldForAction',
             Action : 'CatalogService.updateStock',
             Label : 'Update Stock',
-            ![@UI.Hidden]: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' }},
+            // ![@UI.Hidden]: { $edmJson: { $Path: '/CatalogService.EntityContainer/FeatureControl/operationHidden' }},
         },
         {
             $Type : 'UI.DataFieldForAction',
